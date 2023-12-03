@@ -179,14 +179,6 @@ function ajouterAuPanier(couleur, taille) {
 }
 
 
-
-   
-
-
-
-
-
-
 // 3.1 Événement clique sur un bouton couleur
 $('.btn-filtre-couleur').on('click', function () {
     couleurId = $(this).data("couleur");
