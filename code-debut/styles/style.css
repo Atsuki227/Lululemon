@@ -1,0 +1,92 @@
+/* Ajoutez cette règle de style pour la classe "unavailable" */
+.unavailable {
+    background-color: #d3d3d3; /* Couleur de fond pour les boutons non disponibles */
+    color: #808080; /* Couleur du texte pour les boutons non disponibles */
+    cursor: not-allowed; /* Curseur non autorisé pour indiquer l'indisponibilité */
+    /* Vous pouvez ajouter d'autres styles selon vos préférences */
+
+    position: relative;
+    overflow: hidden;
+}
+
+.unavailable:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    border-top: 2px solid #808080; /* Couleur de la ligne diagonale */
+    width: 100%; /* Longueur de la ligne diagonale */
+    height: 2px; /* Épaisseur de la ligne diagonale */
+    opacity: 0.5;
+}
+
+
+/* Container */
+.container {
+	margin-top: 20px;
+}
+
+/*Les boutons choix de couleurs */
+.btn-filtre-couleur {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	margin: 5px 10px;
+
+
+}
+
+
+.btn-darkLavande {
+	background-color: #a59ecb;
+}
+
+.btn-trueNavy {
+	background-color: #3c4559;
+}
+
+.btn-rhinoGrey {
+	background-color: #b0afb1;
+}
+
+.btn-carbonDust {
+	background-color: #817269;
+	
+}
+
+/* Bouton sélectionné */
+.btn-border-select{
+	border: solid 4px black;
+	
+}
+
+.btn-border-none{
+		border: 1px solid lightgrey
+		
+}
+
+
+
+/* Les tailles */
+
+
+.btn-filtre-taille {
+	margin-right: 0.5rem; /* Vous pouvez ajuster cette valeur selon vos préférences */
+}
+
+/* Bouton AJOUTER AU PANIER */
+.btnPanier {
+	margin-top: 100px;
+	font-size: 16px;
+	color: white;
+	padding: 10px;
+	width: 250px;
+}
+
+/* Ajoutez cette règle CSS pour le contour noir autour des couleurs sélectionnées */
+.btn-filtre-couleur.btn-border-select {
+    border: 2px solid black;
+}
+
+

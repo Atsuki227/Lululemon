@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Page produit Lululemon - Pantalon Femme </title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
+</head>
+<body>
+	<!-- Container : l'ensemble du code de la page et row : la page est divisé en deux colonnes égales -->
+	<div class="container">
+		<div class="row">
+			<!-- La colonne de gauche contient l'image qui prend 100% de l'espace -->
+			<div class="col-6">
+				<div id="image-produit">
+				<!--Elle est caché, car on la génère dynamiquement dans JS : <img src="images/pantalon-lavande.png" id="imagePantalon" class="img-fluid" alt="Pantalon Lululemon Femme Lavande">--> 
+				</div>
+			</div>
+
+			<!-- La colonne de droite contient les infos du produit -->
+			<div class="col-6 infosProduit">
+				<!-- Section statique : Le nom du modèle et le prix -->
+				<div class="nom-prix">
+					<h1>Pantalon de jogging<br> Adapted State</h1>
+					<p>CAN 138,00$</p>	
+				</div>
+				<!-- Options du produits-->
+				<div class="optionsProduit">
+					<!-- Option de la couleur -->
+					<div class="optionsCouleur">
+						<p><b>Couleur </b><span class="optionCouleurSelectionee"></span></p>
+						<!-- Boutons choix de couleur -->
+						<div id="boutonsCouleur" class="options-attribut-echantillon">
+							<!-- Ils sont cachés, car on les génère dynamiquement dans JS : <button type="button" class="btn btn-filtre-couleur btn-darkLavande" data-couleur="0"></button>
+							<button type="button" class="btn btn-filtre-couleur btn-trueNavy" data-couleur="1"></button>
+							<button type="button" class="btn btn-filtre-couleur btn-rhinoGrey" data-couleur="2"></button> 
+							<button type="button" class="btn btn-filtre-couleur btn-carbonDust" data-couleur="3"></button>-->
+						</div>
+					</div>
+					<!-- Option de la taille -->
+					<div class="optionsTaille mt-5">
+						<p><b>Sélectionner la taille </b><span class="optionTailleSelectionee"></span></p>
+						<!-- Boutons choix de tailles -->
+						<div id="boutonsTaille" class="options-attribut-echantillon">
+							<!-- Ils sont cachés, car on les génère dynamiquement dans JS : <button type="button" class="btn btn-outline-dark btn-filtre-taille btn-taille-0" data-taille="0">0</button>
+							<button type="button" class="btn btn-outline-dark btn-filtre-taille btn-taille-2" data-taille="2">2</button>
+							<button type="button" class="btn btn-outline-dark btn-filtre-taille btn-taille-4" data-taille="4">4</button>
+							<button type="button" class="btn btn-outline-dark btn-filtre-taille btn-taille-6" data-taille="6">6</button>-->
+						</div>
+					</div>
+				</div>
+				<!-- Bouton AJOUTER AU PANIER -->
+				<div class="containerBoutonAjoutPanier">
+					<button id="bouton-ajout" type="submit" class="btn btn-danger btn-lg btnPanier">AJOUTER AU PANIER</button>	
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+	<script 
+	src="https://code.jquery.com/jquery-3.7.1.js"integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="app.js"></script>
+</body>
+</html>
