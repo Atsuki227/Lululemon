@@ -53,7 +53,53 @@ for (var i = 0; i < couleurs.length; i = i + 1) {
 }
 
 // Générer les boutons de taille pour la couleur initiale (Dark Lavande)
-updateBoutonsTaille(0);
+$("#boutonsTaille").html("");
+
+    for (var i = 0; i < tailles.length; i++) {
+        var isTailleDispo = pantalons[0]["taillesDispo"].includes(tailles[i]);
+        var classeBouton = isTailleDispo ? 'btn-outline-dark' : 'btn-outline-secondary unavailable'; // Ajout de la classe "unavailable" si la taille n'est pas disponible
+
+        var contenuBoutonTaille = '<button type="button" class="btn ' + classeBouton + ' btn-filtre-taille btn-taille-' + tailles[i] + '" data-taille="' + tailles[i] + '">' + tailles[i] + '</button>';
+        $("#boutonsTaille").append(contenuBoutonTaille);
+    }
+
+    var nomCouleur = '';
+
+    var couleurSelectionnee = pantalons[0]["couleur"];
+
+    if (couleurSelectionnee === 'darkLavande') {
+        nomCouleur = 'Dark Lavande';
+    } else if (couleurSelectionnee === 'rhinoGrey') {
+        nomCouleur = 'Rhino Grey';
+    } else if (couleurSelectionnee === 'carbonDust') {
+        nomCouleur = 'Carbon Dust';
+    } else if (couleurSelectionnee === 'trueNavy') {
+        nomCouleur = 'True Navy';
+    } else {
+        nomCouleur = '';
+    }
+
+    $(".optionCouleurSelectionee").html(nomCouleur);
+
+    $(document).on('click', '.btn-filtre-taille', function () {
+        tailleId = $(this).data("taille");
+        $(".optionTailleSelectionee").html(tailleId);
+        for (var i = 0; i < couleurs.length; i++) {
+            var isCouleurDispo = false;
+    
+            for (var j = 0; j < pantalons.length; j++) {
+                if (pantalons[j]["couleur"] === couleurs[i] && pantalons[j]["taillesDispo"].includes(parseInt(tailleId))) {
+                    isCouleurDispo = true;
+                    break;
+                }
+            }
+    
+            var classeBouton = isCouleurDispo ? 'btn-border-select' : 'btn-border-none';
+    
+            $('.btn-filtre-couleur.btn-' + couleurs[i]).removeClass("btn-border-select btn-border-none");
+            $('.btn-filtre-couleur.btn-' + couleurs[i]).addClass(classeBouton);
+        }
+    });
 $("#boutonsTaille").html("");
 
 for (var i = 0; i < tailles.length; i++) {
@@ -133,8 +179,39 @@ function ajouterAuPanier(couleur, taille) {
 }
 
 
-// Nouvelle fonction pour mettre à jour les boutons de taille en fonction de la couleur sélectionnée
-function updateBoutonsTaille(couleurId) {
+
+   
+
+
+
+
+
+
+// 3.1 Événement clique sur un bouton couleur
+$('.btn-filtre-couleur').on('click', function () {
+    couleurId = $(this).data("couleur");
+
+    // Afficher la couleur du pantalon dans la console
+    console.log("Couleur du pantalon : " + pantalons[couleurId]["couleur"]);
+
+    // Mettre à jour l'image
+    $("#image-produit").html("");
+    var contenuImage = '<img src="' + pantalons[couleurId]["imageSrc"] + '"';
+    contenuImage = contenuImage + 'alt="' + pantalons[couleurId]["imageAlt"] + '"';
+    contenuImage = contenuImage + 'class="img-fluid">';
+    $("#image-produit").append(contenuImage);
+
+    // Mettre à jour la couleur sélectionnée
+    $(".optionCouleurSelectionee").html(pantalons[couleurId]["couleur"]);
+
+    // Réinitialiser les bordures des boutons couleur
+    $('.btn-filtre-couleur').removeClass("btn-border-select btn-border-none");
+    $('.btn-filtre-couleur').addClass("btn-border-none");
+
+    // Appliquer la bordure à la couleur sélectionnée
+    $(this).addClass("btn-border-select");
+
+    // Mettre à jour les boutons de taille en fonction de la nouvelle couleur sélectionnée
     $("#boutonsTaille").html("");
 
     for (var i = 0; i < tailles.length; i++) {
@@ -182,38 +259,6 @@ function updateBoutonsTaille(couleurId) {
             $('.btn-filtre-couleur.btn-' + couleurs[i]).addClass(classeBouton);
         }
     });
-}
-
-
-
-
-
-// 3.1 Événement clique sur un bouton couleur
-$('.btn-filtre-couleur').on('click', function () {
-    couleurId = $(this).data("couleur");
-
-    // Afficher la couleur du pantalon dans la console
-    console.log("Couleur du pantalon : " + pantalons[couleurId]["couleur"]);
-
-    // Mettre à jour l'image
-    $("#image-produit").html("");
-    var contenuImage = '<img src="' + pantalons[couleurId]["imageSrc"] + '"';
-    contenuImage = contenuImage + 'alt="' + pantalons[couleurId]["imageAlt"] + '"';
-    contenuImage = contenuImage + 'class="img-fluid">';
-    $("#image-produit").append(contenuImage);
-
-    // Mettre à jour la couleur sélectionnée
-    $(".optionCouleurSelectionee").html(pantalons[couleurId]["couleur"]);
-
-    // Réinitialiser les bordures des boutons couleur
-    $('.btn-filtre-couleur').removeClass("btn-border-select btn-border-none");
-    $('.btn-filtre-couleur').addClass("btn-border-none");
-
-    // Appliquer la bordure à la couleur sélectionnée
-    $(this).addClass("btn-border-select");
-
-    // Mettre à jour les boutons de taille en fonction de la nouvelle couleur sélectionnée
-    updateBoutonsTaille(couleurId);
 
     // 3.1 Événement clique sur un bouton couleur
 $('.btn-filtre-couleur').on('click', function () {
@@ -227,7 +272,53 @@ $('.btn-filtre-couleur').on('click', function () {
     $(this).addClass("btn-border-select active");
 
     // Mettre à jour les boutons de taille en fonction de la nouvelle couleur sélectionnée
-    updateBoutonsTaille(couleurId);
+    $("#boutonsTaille").html("");
+
+    for (var i = 0; i < tailles.length; i++) {
+        var isTailleDispo = pantalons[couleurId]["taillesDispo"].includes(tailles[i]);
+        var classeBouton = isTailleDispo ? 'btn-outline-dark' : 'btn-outline-secondary unavailable'; // Ajout de la classe "unavailable" si la taille n'est pas disponible
+
+        var contenuBoutonTaille = '<button type="button" class="btn ' + classeBouton + ' btn-filtre-taille btn-taille-' + tailles[i] + '" data-taille="' + tailles[i] + '">' + tailles[i] + '</button>';
+        $("#boutonsTaille").append(contenuBoutonTaille);
+    }
+
+    var nomCouleur = '';
+
+    var couleurSelectionnee = pantalons[couleurId]["couleur"];
+
+    if (couleurSelectionnee === 'darkLavande') {
+        nomCouleur = 'Dark Lavande';
+    } else if (couleurSelectionnee === 'rhinoGrey') {
+        nomCouleur = 'Rhino Grey';
+    } else if (couleurSelectionnee === 'carbonDust') {
+        nomCouleur = 'Carbon Dust';
+    } else if (couleurSelectionnee === 'trueNavy') {
+        nomCouleur = 'True Navy';
+    } else {
+        nomCouleur = '';
+    }
+
+    $(".optionCouleurSelectionee").html(nomCouleur);
+
+    $(document).on('click', '.btn-filtre-taille', function () {
+        tailleId = $(this).data("taille");
+        $(".optionTailleSelectionee").html(tailleId);
+        for (var i = 0; i < couleurs.length; i++) {
+            var isCouleurDispo = false;
+    
+            for (var j = 0; j < pantalons.length; j++) {
+                if (pantalons[j]["couleur"] === couleurs[i] && pantalons[j]["taillesDispo"].includes(parseInt(tailleId))) {
+                    isCouleurDispo = true;
+                    break;
+                }
+            }
+    
+            var classeBouton = isCouleurDispo ? 'btn-border-select' : 'btn-border-none';
+    
+            $('.btn-filtre-couleur.btn-' + couleurs[i]).removeClass("btn-border-select btn-border-none");
+            $('.btn-filtre-couleur.btn-' + couleurs[i]).addClass(classeBouton);
+        }
+    });
 });
 
 });
