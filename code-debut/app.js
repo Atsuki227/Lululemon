@@ -53,6 +53,7 @@ for (var i = 0; i < couleurs.length; i = i + 1) {
 }
 
 // Générer les boutons de taille pour la couleur initiale (Dark Lavande)
+updateBoutonsTaille(0);
 $("#boutonsTaille").html("");
 
 for (var i = 0; i < tailles.length; i++) {
@@ -84,7 +85,21 @@ $(".optionCouleurSelectionee").html(nomCouleur);
 $(document).on('click', '.btn-filtre-taille', function () {
     tailleId = $(this).data("taille");
     $(".optionTailleSelectionee").html(tailleId);
-    updateBoutonsCouleur(tailleId);
+    for (var i = 0; i < couleurs.length; i++) {
+        var isCouleurDispo = false;
+
+        for (var j = 0; j < pantalons.length; j++) {
+            if (pantalons[j]["couleur"] === couleurs[i] && pantalons[j]["taillesDispo"].includes(parseInt(tailleId))) {
+                isCouleurDispo = true;
+                break;
+            }
+        }
+
+        var classeBouton = isCouleurDispo ? 'btn-border-select' : 'btn-border-none';
+
+        $('.btn-filtre-couleur.btn-' + couleurs[i]).removeClass("btn-border-select btn-border-none");
+        $('.btn-filtre-couleur.btn-' + couleurs[i]).addClass(classeBouton);
+    }
 });
 
 // 2.2.2 État initial : afficher la couleur sélectionnée Dark Lavande
@@ -117,24 +132,6 @@ function ajouterAuPanier(couleur, taille) {
     console.log("Contenu du panier :", panier);
 }
 
-// Nouvelle fonction pour mettre à jour les boutons de couleur en fonction de la taille sélectionnée
-function updateBoutonsCouleur(tailleId) {
-    for (var i = 0; i < couleurs.length; i++) {
-        var isCouleurDispo = false;
-
-        for (var j = 0; j < pantalons.length; j++) {
-            if (pantalons[j]["couleur"] === couleurs[i] && pantalons[j]["taillesDispo"].includes(parseInt(tailleId))) {
-                isCouleurDispo = true;
-                break;
-            }
-        }
-
-        var classeBouton = isCouleurDispo ? 'btn-border-select' : 'btn-border-none';
-
-        $('.btn-filtre-couleur.btn-' + couleurs[i]).removeClass("btn-border-select btn-border-none");
-        $('.btn-filtre-couleur.btn-' + couleurs[i]).addClass(classeBouton);
-    }
-}
 
 // Nouvelle fonction pour mettre à jour les boutons de taille en fonction de la couleur sélectionnée
 function updateBoutonsTaille(couleurId) {
@@ -169,7 +166,21 @@ function updateBoutonsTaille(couleurId) {
     $(document).on('click', '.btn-filtre-taille', function () {
         tailleId = $(this).data("taille");
         $(".optionTailleSelectionee").html(tailleId);
-        updateBoutonsCouleur(tailleId);
+        for (var i = 0; i < couleurs.length; i++) {
+            var isCouleurDispo = false;
+    
+            for (var j = 0; j < pantalons.length; j++) {
+                if (pantalons[j]["couleur"] === couleurs[i] && pantalons[j]["taillesDispo"].includes(parseInt(tailleId))) {
+                    isCouleurDispo = true;
+                    break;
+                }
+            }
+    
+            var classeBouton = isCouleurDispo ? 'btn-border-select' : 'btn-border-none';
+    
+            $('.btn-filtre-couleur.btn-' + couleurs[i]).removeClass("btn-border-select btn-border-none");
+            $('.btn-filtre-couleur.btn-' + couleurs[i]).addClass(classeBouton);
+        }
     });
 }
 
@@ -229,7 +240,21 @@ $(document).on('click', '.btn-filtre-taille', function () {
     console.log("Taille du pantalon : " + tailleId);
 
     $(".optionTailleSelectionee").html(tailleId);
-    updateBoutonsCouleur(tailleId);
+    for (var i = 0; i < couleurs.length; i++) {
+        var isCouleurDispo = false;
+
+        for (var j = 0; j < pantalons.length; j++) {
+            if (pantalons[j]["couleur"] === couleurs[i] && pantalons[j]["taillesDispo"].includes(parseInt(tailleId))) {
+                isCouleurDispo = true;
+                break;
+            }
+        }
+
+        var classeBouton = isCouleurDispo ? 'btn-border-select' : 'btn-border-none';
+
+        $('.btn-filtre-couleur.btn-' + couleurs[i]).removeClass("btn-border-select btn-border-none");
+        $('.btn-filtre-couleur.btn-' + couleurs[i]).addClass(classeBouton);
+    }
 });
 
 //3.3 Actions lorsqu'il y a un click sur le bouton ajout au panier
